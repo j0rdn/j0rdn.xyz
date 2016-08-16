@@ -1,14 +1,17 @@
+package main
+
 import (
-    "github.com/kataras/iris/"
+    "github.com/kataras/iris"
+    "github.com/iris-contrib/template/markdown"
 )
 
 func main(){
     app := iris.New()
     app.Config.Gzip = true
-    app.UseTemplate(markdown.New()).Directory("./templates",".md")
+    app.UseTemplate(markdown.New()).Directory("public/templates",".md")
     app.StaticFS("/public","./public/",1)
     app.Get("/", home)
-    app.Listen(":8080")
+    app.Listen(":80")
 }
 
 
