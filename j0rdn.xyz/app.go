@@ -3,6 +3,7 @@ package main
 import (
     "github.com/kataras/iris"
     "github.com/iris-contrib/template/markdown"
+    "github.com/iris-contrib/middleware/logger"
 )
 
 func main(){
@@ -10,8 +11,9 @@ func main(){
     app.Config.Gzip = true
     app.UseTemplate(markdown.New()).Directory("public/templates",".md")
     app.StaticFS("/public","./public/",1)
+    app.Use(logger.New(iris.Logger))
     app.Get("/", home)
-    app.Listen(":80")
+    app.Listen(":8080")
 }
 
 
