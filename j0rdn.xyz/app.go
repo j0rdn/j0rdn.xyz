@@ -12,9 +12,11 @@ func main(){
     app.UseTemplate(markdown.New()).Directory("public/templates",".md")
     app.StaticFS("/public","./public/",1)
     app.Use(logger.New(iris.Logger))
-    app.Get("/", home)
-    app.OnError(iris.StatusInternalServerError, serverError)
+
     app.OnError(iris.StatusNotFound, notFound)
+     
+    app.Get("/", home)
+    
     app.Listen(":8080")
 
 }
@@ -26,6 +28,5 @@ func home(ctx *iris.Context){
 
 func notFound(ctx *iris.Context){
     ctx.MustRender("404.md",nil)
-    iris.Logger.Printf("Page Not Found")
 }
 
