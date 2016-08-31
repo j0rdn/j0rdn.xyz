@@ -12,15 +12,10 @@ func main(){
     app.UseTemplate(markdown.New()).Directory("public/templates",".md")
     app.StaticFS("/public","./public/",1)
     app.Use(logger.New(iris.Logger))
-
     app.OnError(iris.StatusNotFound, notFound)
-     
     app.Get("/", home)
-    
     app.Listen(":8080")
-
 }
-
 
 func home(ctx *iris.Context){
     ctx.MustRender("index.md",nil)
