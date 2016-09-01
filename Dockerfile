@@ -9,5 +9,5 @@ COPY . /go/src/app
 RUN go-wrapper download
 RUN go-wrapper install
 
-EXPOSE 8080
+EXPOSE 9000
 ENTRYPOINT [ "go-wrapper", "run", "app.go" ]
